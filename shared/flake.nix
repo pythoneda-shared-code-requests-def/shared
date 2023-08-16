@@ -41,8 +41,8 @@
       let
         org = "pythoneda-shared-code-requests";
         repo = "shared";
-        version = "0.0.1a1";
-        sha256 = "sha256-S0Y16vq9aWQP3RO/2xwH5jRY9aAONdKX9xK+fA5xLu8=";
+        version = "0.0.1a2";
+        sha256 = "sha256-si8HDQI4BuWDTyDEXFYnUD/cWRp/mjO/cfa1c6C6ETg=";
         pname = "${org}-${repo}";
         pythonpackage = "pythoneda.shared.code_requests";
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
