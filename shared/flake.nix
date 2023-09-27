@@ -21,6 +21,16 @@
   inputs = rec {
     nixos.url = "github:NixOS/nixpkgs/nixos-23.05";
     flake-utils.url = "github:numtide/flake-utils/v1.0.0";
+    pythoneda-shared-nix-flake-shared = {
+      url =
+        "github:pythoneda-shared-nix-flake/shared-artifact/0.0.1a8?dir=shared";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.nixos.follows = "nixos";
+      inputs.pythoneda-shared-pythoneda-banner.follows =
+        "pythoneda-shared-pythoneda-banner";
+      inputs.pythoneda-shared-pythoneda-domain.follows =
+        "pythoneda-shared-pythoneda-domain";
+    };
     pythoneda-shared-pythoneda-banner = {
       url = "github:pythoneda-shared-pythoneda/banner/0.0.1a17";
       inputs.nixos.follows = "nixos";
@@ -58,8 +68,9 @@
         nixosVersion = builtins.readFile "${nixos}/.version";
         nixpkgsRelease = "nixos-${nixosVersion}";
         shared = import "${pythoneda-shared-pythoneda-banner}/nix/shared.nix";
-        pythoneda-shared-code-requests-shared-for =
-          { python, pythoneda-shared-pythoneda-domain }:
+        pythoneda-shared-code-requests-shared-for = { python
+          , pythoneda-shared-nix-flake-shared, pythoneda-shared-pythoneda-domain
+          }:
           let
             pnameWithUnderscores =
               builtins.replaceStrings [ "-" ] [ "_" ] pname;
@@ -79,7 +90,9 @@
               desc = description;
               inherit homepage package pname pythonMajorMinorVersion
                 pythonpackage version;
-              pythonedaSharedPythonedaDomainVersion =
+              pythonedaSharedNixFlakeShared =
+                pythoneda-shared-nix-flake-shared.version;
+              pythonedaSharedPythonedaDomain =
                 pythoneda-shared-pythoneda-domain.version;
               src = pyprojectTemplateFile;
             };
@@ -92,8 +105,10 @@
             format = "pyproject";
 
             nativeBuildInputs = with python.pkgs; [ pip pkgs.jq poetry-core ];
-            propagatedBuildInputs = with python.pkgs;
-              [ pythoneda-shared-pythoneda-domain ];
+            propagatedBuildInputs = with python.pkgs; [
+              pythoneda-shared-nix-flake-shared
+              pythoneda-shared-pythoneda-domain
+            ];
 
             # pythonImportsCheck = [ pythonpackage ];
 
@@ -217,24 +232,32 @@
           pythoneda-shared-code-requests-shared-python38 =
             pythoneda-shared-code-requests-shared-for {
               python = pkgs.python38;
+              pythoneda-shared-nix-flake-shared =
+                pythoneda-shared-nix-flake-shared.packages.${system}.pythoneda-shared-nix-flake-shared-python38;
               pythoneda-shared-pythoneda-domain =
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python38;
             };
           pythoneda-shared-code-requests-shared-python39 =
             pythoneda-shared-code-requests-shared-for {
               python = pkgs.python39;
+              pythoneda-shared-nix-flake-shared =
+                pythoneda-shared-nix-flake-shared.packages.${system}.pythoneda-shared-nix-flake-shared-python39;
               pythoneda-shared-pythoneda-domain =
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python39;
             };
           pythoneda-shared-code-requests-shared-python310 =
             pythoneda-shared-code-requests-shared-for {
               python = pkgs.python310;
+              pythoneda-shared-nix-flake-shared =
+                pythoneda-shared-nix-flake-shared.packages.${system}.pythoneda-shared-nix-flake-shared-python310;
               pythoneda-shared-pythoneda-domain =
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python310;
             };
           pythoneda-shared-code-requests-shared-python311 =
             pythoneda-shared-code-requests-shared-for {
               python = pkgs.python311;
+              pythoneda-shared-nix-flake-shared =
+                pythoneda-shared-nix-flake-shared.packages.${system}.pythoneda-shared-nix-flake-shared-python311;
               pythoneda-shared-pythoneda-domain =
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python311;
             };

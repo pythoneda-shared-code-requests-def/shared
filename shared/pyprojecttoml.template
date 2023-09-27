@@ -27,7 +27,8 @@ packages = [{include = "@package@"}]
 
 [tool.poetry.dependencies]
 python = "^@pythonMajorMinorVersion@"
-pythoneda-shared-pythoneda-domain = "^@pythonedaSharedPythonedaDomainVersion@"
+pythoneda-shared-nix-flake-shared = "^@pythonedaSharedNixFlakeShared@"
+pythoneda-shared-pythoneda-domain = "^@pythonedaSharedPythonedaDomain@"
 
 [build-system]
 requires = ["poetry-core"]
