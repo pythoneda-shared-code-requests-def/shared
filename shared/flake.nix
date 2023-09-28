@@ -19,11 +19,11 @@
 {
   description = "Shared kernel for pythoneda-shared-code-requests/shared";
   inputs = rec {
-    nixos.url = "github:NixOS/nixpkgs/nixos-23.05";
     flake-utils.url = "github:numtide/flake-utils/v1.0.0";
+    nixos.url = "github:NixOS/nixpkgs/nixos-23.05";
     pythoneda-shared-nix-flake-shared = {
       url =
-        "github:pythoneda-shared-nix-flake/shared-artifact/0.0.1a8?dir=shared";
+        "github:pythoneda-shared-nix-flake/shared-artifact/0.0.2?dir=shared";
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixos.follows = "nixos";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -32,13 +32,13 @@
         "pythoneda-shared-pythoneda-domain";
     };
     pythoneda-shared-pythoneda-banner = {
-      url = "github:pythoneda-shared-pythoneda/banner/0.0.1a17";
+      url = "github:pythoneda-shared-pythoneda/banner/0.0.2";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
     };
     pythoneda-shared-pythoneda-domain = {
       url =
-        "github:pythoneda-shared-pythoneda/domain-artifact/0.0.1a43?dir=domain";
+        "github:pythoneda-shared-pythoneda/domain-artifact/0.0.2?dir=domain";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -51,8 +51,8 @@
       let
         org = "pythoneda-shared-code-requests";
         repo = "shared";
-        version = "0.0.1a8";
-        sha256 = "sha256-wnSZ3psDRrNkr8q29gZ693SmkUtFpsqTYdrFRxZ9JP4=";
+        version = "0.0.2";
+        sha256 = "sha256-RPhE+5NrJGNAiVjhn3ffJ7wKUpezuTkOKP3DcfU4H9o=";
         pname = "${org}-${repo}";
         pythonpackage = "pythoneda.shared.code_requests";
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
