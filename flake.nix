@@ -1,8 +1,8 @@
-# shared/flake.nix
+# flake.nix
 #
 # This file packages pythoneda-shared-code-requests/shared as a Nix flake.
 #
-# Copyright (C) 2023-today rydnr's pythoneda-shared-code-requests/shared-artifact
+# Copyright (C) 2023-today rydnr's pythoneda-shared-code-requests-def/shared
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,21 +28,19 @@
         "pythoneda-shared-pythoneda-banner";
       inputs.pythoneda-shared-pythoneda-domain.follows =
         "pythoneda-shared-pythoneda-domain";
-      url =
-        "github:pythoneda-shared-nix-flake/shared-artifact/0.0.3?dir=shared";
+      url = "github:pythoneda-shared-nix-flake-def/shared/0.0.8";
     };
     pythoneda-shared-pythoneda-banner = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixos.follows = "nixos";
-      url = "github:pythoneda-shared-pythoneda/banner/0.0.13";
+      url = "github:pythoneda-shared-pythoneda-def/banner/0.0.2";
     };
     pythoneda-shared-pythoneda-domain = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixos.follows = "nixos";
       inputs.pythoneda-shared-pythoneda-banner.follows =
         "pythoneda-shared-pythoneda-banner";
-      url =
-        "github:pythoneda-shared-pythoneda/domain-artifact/0.0.13?dir=domain";
+      url = "github:pythoneda-shared-pythoneda-def/domain/0.0.2";
     };
   };
   outputs = inputs:
